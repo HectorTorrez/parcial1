@@ -1,32 +1,71 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-router" target="_blank" rel="noopener">router</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+  <div class=" ">
+    <h1 class="mb-3">{{ msg }}</h1>
+   
+   <form class="d-flex align-items-start w-100">
+  <div class="mb-3 w-25 ms-3 ">
+    <label for="exampleInputEmail1" class="form-label">Nombre</label>
+    <input type="text" v-model="Nombre" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ingresa tu Nombre"  v-on:keyup.enter="agregarUsuario">
+    
+  </div>
+  <div class="mb-3 w-25 ms-3 "> 
+    <label for="exampleInputPassword1" class="form-label">Apellido</label>
+    <input type="text" v-model="Apellido" class="form-control" id="exampleInputPassword1" placeholder="Ingresa tu Apellido"  v-on:keyup.enter="agregarUsuario">
+  </div>
+  <div class="mb-3 w-25 ms-3 ">
+    <label for="exampleInputPassword1" class="form-label">Codigo</label>
+    <input type="text" v-model="Codigo" class="form-control" id="exampleInputPassword1" placeholder="Ingresa tu Codigo"  v-on:keyup.enter="agregarUsuario">
+  </div>
+  <div class="mb-3 w-25 ms-3 ">
+    <label for="exampleInputPassword1" class="form-label">Edad</label>
+    <input type="number" v-model="Edad" class="form-control" id="exampleInputPassword1" placeholder="Ingresa tu Edad" v-on:keyup.enter="agregarUsuario">
+  </div>
+  <div class="mb-3 w-25 ms-3 ">
+
+<b-button @click. ="agregarUsuario()" variant="btn btn-success  ms-3 mb-2 px-3" > Agregar Usuarios</b-button>
+<b-button @click="Nombre='', Apellido='', Codigo='', Edad=''" block variant="outline-danger ms-3 mb-2  px-3" >LIMPIAR CELDAS</b-button>
+  </div>
+  
+
+</form>
+
+<b-button @click="elimiartodo(index)" class="btn btn-danger w-100 right  mb-2  px-3" >ELIMINAR TODOS LOS REGITROS</b-button>
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Hombre</th>
+      <th scope="col">Apellido</th>
+      <th scope="col">Codigo</th>
+      <th scope="col">Edad</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Héctor</td>
+      <td>Torrez</td>
+      <td>SMIS080319</td>
+      <td>21</td>
+      <td><b-icon icon="lock-fill"></b-icon></td>
+    </tr>
+    <tr v-for="(usuario, index) in usuarios" v-bind:key="usuario">
+
+      <td> {{usuario.Nombre}}</td>
+      <td>{{usuario.Apellido}}</td>
+      <td>{{usuario.Codigo}}</td>
+      <td>{{usuario.Edad}}</td>
+
+<!-- eliminar una celda -->
+      <td><b-icon icon="trash-fill" @click="eliminar(index)"></b-icon></td>
+      
+      
+    </tr>
+  </tbody>
+    </table>
+
+
+
+
+
   </div>
 </template>
 
@@ -35,24 +74,44 @@ export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  data() {
+    return {
+      Nombre: '',
+      Apellido: '',
+      Codigo: '',
+      Edad:'',
+      usuarios:[]
+    }
+  },
+  methods: {
+    agregarUsuario  (){
+      var data ={
+        Nombre: this.Nombre,
+      Apellido: this.Apellido,
+      Codigo: this.Codigo,
+      Edad: this.Edad
+      };
+      this.usuarios.push(data);
+      this.Nombre='',
+      this.Apellido='',
+      this.Codigo='',
+      this.Edad=''
+      
+
+
+      
+      },
+      eliminar(index){
+        this.usuarios.splice(index, 1);
+      },
+    elimiartodo(index){
+      this.usuarios.splice(index)
+    }
+    }
   }
-}
+  
+
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>
+
