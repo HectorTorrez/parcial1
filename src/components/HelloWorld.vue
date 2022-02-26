@@ -47,6 +47,13 @@
       <td>21</td>
       <td><b-icon icon="lock-fill"></b-icon></td>
     </tr>
+    <tr>
+      <td>Cristopher</td>
+      <td>Turcios</td>
+      <td>SMIS020521</td>
+      <td>20</td>
+      <td><b-icon icon="lock-fill"></b-icon></td>
+    </tr>
     <tr v-for="(usuario, index) in usuarios" v-bind:key="usuario">
 
       <td> {{usuario.Nombre}}</td>
@@ -113,5 +120,7 @@ export default {
   
 
 </script>
+
+
 
 
