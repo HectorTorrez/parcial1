@@ -77,7 +77,26 @@
   </div>
 </div>
       </div>
+<!-- Longitud cents -->
 
+      <div class="col-sm-6">
+<div class="card">
+  <div class="card-header text-center">
+      Longitud
+  </div>
+  <div class="card-body">
+    <h5 class="card-title text-left">Pulgadas a centimetros</h5>
+    
+    <input type="number" class="" v-model="cantidadcentimetros" id="cantidad" placeholder="Ingrese las pulgadas">
+ <span class="ms-3">{{totalcentimetros}} centimetros/s</span>
+    
+  </div>
+  <div class="">
+     <a href="#" v-on:click="convertircentimetros" class="btn btn-primary ms-3 mb-2 px-3">Convertir</a>
+    <b-button @click=" cantidadcentimetros='',totalcentimetros=0"  variant="outline-danger  ms-3 mb-2 px-3" >Limpiar Datos</b-button>
+    </div>
+</div>
+      </div>
       <!-- Almacenamiento -->
 
 <div class="col-sm-6">
@@ -102,8 +121,8 @@
     </div>
     
 
- <b-button @click="cantidadalmacenamiento='', totalalmacenamiento=0, cantidadkilometros='', totalkilometro=0, cantidadtiempo=''
- totaltiempo=0, cantidadmoneda='', totalmoneda=0, cantidad='', total=0" block variant="outline-danger w-75 ms-3 mb-2 mt-3  px-3" >LIMPIAR TODOS LOS DATOS INGRESADOS </b-button>
+ <b-button @click="cantidadalmacenamiento='', totalalmacenamiento=0, cantidadkilometros='', totalkilometro=0,cantidadcentimetros='',totalcentimetros=0
+ cantidadtiempo='', totaltiempo=0, cantidadmoneda='', totalmoneda=0, cantidad='', total=0" block variant="outline-danger w-75 ms-3 mb-2 mt-3  px-3" >LIMPIAR TODOS LOS DATOS INGRESADOS </b-button>
 
 
 
@@ -136,7 +155,10 @@ export default {
       totaltiempo:0,
 
       cantidadalmacenamiento:'',
-      totalalmacenamiento:0
+      totalalmacenamiento:0,
+
+      cantidadcentimetros:'',
+      totalcentimetros:0,
       
     }
   },
@@ -157,10 +179,14 @@ export default {
       convertirtiempo(){
       this.totaltiempo = this.cantidadtiempo * 24 
     },
+    
+      convertircentimetros(){
+      this.totalcentimetros = this.cantidadcentimetros * 2.54
+    },
 
     convertiralmacenamiento(){
       this.totalalmacenamiento = this.cantidadalmacenamiento * 1000
-    }
+    },
     
   },
   
